@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { getBookDetails } from "../services/googleBooksAPI.mjs";
 import BookCard from "../components/BookCard";
+import BookSearchForm from "../components/BookSearchForm";
 
 export default function Home() {
   const [books, setBooks] = useState([])
@@ -22,9 +23,10 @@ export default function Home() {
 
   // console.log(books)
   return (
-    <div className="App">
+    <div className="Home">
       <h1>Books</h1>
-      <div className="starship-cards">
+      <BookSearchForm />
+      <div className="book-cards">
         {books.map((book) => (
           <BookCard book={book.volumeInfo} key={book.id} />
         ))}
