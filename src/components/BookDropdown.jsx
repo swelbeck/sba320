@@ -19,11 +19,11 @@ export default function BookDropdown() {
     "Children's Books",
   ];
 
-  console.log()
+
   return (
     <form>
       <label htmlFor="genre">
-        Genres
+        Genre: {" "}
         <select
           id="genre"
           name="genre"
