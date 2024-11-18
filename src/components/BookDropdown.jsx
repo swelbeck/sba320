@@ -1,9 +1,11 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { useState } from "react";
+// import Dropdown from "react-bootstrap/Dropdown";
+// import DropdownButton from "react-bootstrap/DropdownButton";
+import { useContext } from "react";
+import { GenreContext } from "../contexts/GenreContexts";
 
 export default function BookDropdown() {
-  const [genreOption, setGenreOptions] = useState("");
+  const {selectedGenre, setSelectedGenre} = useContext(GenreContext);
+
   const genreList = [
     "Fiction",
     "Nonfiction",
@@ -17,6 +19,7 @@ export default function BookDropdown() {
     "Children's Books",
   ];
 
+  console.log()
   return (
     <form>
       <label htmlFor="genre">
@@ -25,10 +28,13 @@ export default function BookDropdown() {
           id="genre"
           name="genre"
           disabled={!genreList.length}
-          value={genreOption}
-          onChange={(e) => setGenreOptions(e.target.value)}
+          value={selectedGenre}
+          onChange={(e) => {
+            setSelectedGenre(e.target.value);
+            console.log(e.target.value);
+          }}
         >
-          <option value="" />
+          <option value="">Select a genre</option>
           {genreList.map((genre) => (
             <option value={genre} key={genre}>
               {genre}

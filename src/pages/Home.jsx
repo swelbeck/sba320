@@ -1,28 +1,36 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useState, useEffect, useContext } from "react";
+// import { useParams } from "react-router-dom";
+// import axios from "axios";
 import {
   getBookDetails,
   getBooksByGenre,
 } from "../services/googleBooksAPI.mjs";
 import BookCard from "../components/BookCard";
 import BookSearchForm from "../components/BookSearchForm";
+import { GenreContext } from "../contexts/GenreContexts";
 
 export default function Home() {
-  const [books, setBooks] = useState([])
+  const [books, setBooks] = useState([]);
+  const { selectedGenre } = useContext(GenreContext);
 
   useEffect(() => {
     async function fetchBooks() {
       try {
-        const bookData = await getBookDetails(); 
+        let bookData;
+        if (selectedGenre) {
+          bookData = await getBooksByGenre(selectedGenre);
+        } else {
+          bookData = await getBookDetails();
+        }
+
         // console.log(bookData)
         setBooks(bookData);
       } catch (error) {
-        console.error(error)
+        console.error("Error fetching books", error);
       }
     }
     fetchBooks();
-  }, []);
+  }, [selectedGenre]);
 
   // console.log(books)
   return (
@@ -37,4 +45,3 @@ export default function Home() {
     </div>
   );
 }
-
