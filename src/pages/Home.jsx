@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { getBookDetails } from "../services/googleBooksAPI.mjs";
+import {
+  getBookDetails,
+  getBooksByGenre,
+} from "../services/googleBooksAPI.mjs";
 import BookCard from "../components/BookCard";
 import BookSearchForm from "../components/BookSearchForm";
 
@@ -12,7 +15,7 @@ export default function Home() {
     async function fetchBooks() {
       try {
         const bookData = await getBookDetails(); 
-        console.log(bookData)
+        // console.log(bookData)
         setBooks(bookData);
       } catch (error) {
         console.error(error)

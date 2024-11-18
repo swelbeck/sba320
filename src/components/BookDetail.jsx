@@ -1,5 +1,7 @@
-export default function BookDetail(){
-    return(
-        <button>Hello</button>
-    )
+export default function BookDetail() {
+  return (
+    <div>
+      <button>Hello</button>
+    </div>
+  );
 }

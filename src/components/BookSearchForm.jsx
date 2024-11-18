@@ -7,8 +7,9 @@ export default function BookSearchForm() {
         <label htmlFor="">
           <input type="text" placeholder="Search here..." />
         </label>
-        <BookDropdown />
+        <button>Search</button>
       </form>
+      <BookDropdown />
     </div>
   );
 }
