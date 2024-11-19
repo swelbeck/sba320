@@ -55,7 +55,7 @@ export default function Home() {
       <BookSearchForm setSearchTerms={setSearchTerms} />
       <div className="book-cards">
         {books.map((book) => (
-          <div>
+          <div key={book.id}>
             <BookCard
               book={book.volumeInfo}
               key={book.id}
