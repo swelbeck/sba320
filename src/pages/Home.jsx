@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 // import { useParams } from "react-router-dom";
-// import axios from "axios";
+
 import {
   getBookDetails,
   getBooksByGenre,
@@ -10,6 +10,10 @@ import {
 import BookCard from "../components/BookCard";
 import BookSearchForm from "../components/BookSearchForm";
 import { GenreContext } from "../contexts/GenreContexts";
+import BookPopUpCard from "../components/BookPopUpDetail";
+import {CartProvider, CartToggleButton} from "../contexts/BookPopUpContext";
+import { Product } from "../components/BookPopUpDetail";
+import Cart from "../components/PopUpWindow";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
@@ -43,16 +47,28 @@ export default function Home() {
     fetchBooks();
   }, [selectedGenre, searchTerm]);
 
-  // console.log(books)
   return (
     <div className="Home">
       <h1>Books</h1>
       <BookSearchForm setSearchTerms={setSearchTerms} />
       <div className="book-cards">
         {books.map((book) => (
-          <BookCard book={book.volumeInfo} key={book.id} />
+          <div>
+            <BookCard book={book.volumeInfo} key={book.id} />
+          </div>
         ))}
       </div>
+      {/* <CartApp /> */}
+      <CartProvider>
+        {books.map((book) => (
+          <div>
+            <CartToggleButton />
+            <Product book={book.volumeInfo} key={book.id} />
+            {/* <Product id={2} name="Product 2" price={20} /> */}
+            <Cart />
+          </div>
+        ))}
+      </CartProvider>
     </div>
   );
 }
