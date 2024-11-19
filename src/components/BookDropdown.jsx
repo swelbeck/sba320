@@ -29,7 +29,7 @@ export default function BookDropdown() {
           value={selectedGenre}
           onChange={(e) => {
             setSelectedGenre(e.target.value);
-            console.log(e.target.value);
+            // console.log(e.target.value); 
           }}
         >
           <option value="">Select a genre</option>
