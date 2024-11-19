@@ -6,7 +6,6 @@ export const getBookDetails = async () => {
   try {
     const response = await axios.get(url);
     const bookResults = response.data.items;
-    console.log(bookResults)
     return bookResults;
   } catch (error) {
     console.error("Error fetching book details:", error);
@@ -19,7 +18,6 @@ export const getBooksByGenre = async (genreId) => {
   try {
     const response = await axios.get(url);
     const bookResults = response.data.items;
-    // console.log(bookResults);
     return bookResults;
   } catch (error) {
     console.error("Error fetching books by genre:", error);
@@ -32,7 +30,6 @@ export const getBooksBySearch = async (query) => {
   try {
     const response = await axios.get(url);
     const bookResults = response.data.items;
-    // console.log(bookResults);
     return bookResults;
   } catch (error) {
     console.error("Error fetching books by genre:", error);
@@ -45,11 +42,9 @@ export const getBooksBySearchAndGenre = async (genreId, query) => {
   try {
     const response = await axios.get(url);
     const bookResults = response.data.items;
-    console.log(bookResults);
     return bookResults;
   } catch (error) {
     console.error("Error filtering books by genre and search terms:", error);
   }
 };
 
-// getBooksBySearchAndGenre("fiction", "fall");
