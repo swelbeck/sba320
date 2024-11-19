@@ -5,7 +5,7 @@ export default function BookPopUpCard({ book }) {
       <img src={book.imageLinks.thumbnail} className="card-image"></img>
       <p className="popup-author">
         <span className="popup-names">Authors: </span>
-        {book.authors}
+        {book.authors.join(", ")}
       </p>
       <p className="popup-description">
         <span className="popup-names">Description: </span>

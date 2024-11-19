@@ -7,7 +7,7 @@ export default function BookCard({ book, onLearnMore }) {
         alt={`${book.title} cover`}
         className="card-image"
       ></img>
-      <p className="card-author">{book.authors}</p>
+      <p className="card-author">{book.authors.join(", ")}</p>
       <button className="card-button" onClick={onLearnMore}>
         Learn More
       </button>
