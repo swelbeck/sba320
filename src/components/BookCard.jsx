@@ -1,10 +1,16 @@
-export default function BookCard({ book }) {
+export default function BookCard({ book, onLearnMore }) {
   return (
     <div className="card">
       <h2 className="card-title">{book.title}</h2>
-      <img src={book.imageLinks.thumbnail} className="card-image"></img>
+      <img
+        src={book.imageLinks.thumbnail}
+        alt={`${book.title} cover`}
+        className="card-image"
+      ></img>
       <p className="card-author">{book.authors}</p>
-      <button className="card-button">Learn More</button>
+      <button className="card-button" onClick={onLearnMore}>
+        Learn More
+      </button>
     </div>
   );
 }

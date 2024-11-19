@@ -22,7 +22,6 @@
 }
 
 .card {
-  /* flex: 1 1 300px; */
   border: 1px solid #ddd;
   background-color: rgba(21, 93, 91, 0.688);
   padding: 1rem;
@@ -45,9 +44,6 @@
   line-height: 1.5rem;
   overflow-wrap: break-word;
   text-align: center;
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
 }
 
 .card-author {

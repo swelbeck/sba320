@@ -1,23 +1,19 @@
 import { useState, useEffect, useContext } from "react";
-// import { useParams } from "react-router-dom";
-
+import { GenreContext } from "../contexts/GenreContexts";
+import BookCard from "../components/BookCard";
+import BookSearchForm from "../components/BookSearchForm";
+import BookPopUpCard from "../components/BookPopUpDetail";
 import {
   getBookDetails,
   getBooksByGenre,
   getBooksBySearch,
   getBooksBySearchAndGenre,
 } from "../services/googleBooksAPI.mjs";
-import BookCard from "../components/BookCard";
-import BookSearchForm from "../components/BookSearchForm";
-import { GenreContext } from "../contexts/GenreContexts";
-import BookPopUpCard from "../components/BookPopUpDetail";
-import {CartProvider, CartToggleButton} from "../contexts/BookPopUpContext";
-import { Product } from "../components/BookPopUpDetail";
-import Cart from "../components/PopUpWindow";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerms] = useState("");
+  const [popupBook, setPopupBook] = useState(null);
   const { selectedGenre } = useContext(GenreContext);
 
   useEffect(() => {
@@ -47,28 +43,35 @@ export default function Home() {
     fetchBooks();
   }, [selectedGenre, searchTerm]);
 
+  function handlePopUpClose(e) {
+    if (e.target.className === "popup-overlay") {
+      setPopupBook(null);
+    }
+  }
+
   return (
     <div className="Home">
-      <h1>Books</h1>
+      <h1>Book Haven</h1>
       <BookSearchForm setSearchTerms={setSearchTerms} />
       <div className="book-cards">
         {books.map((book) => (
           <div>
-            <BookCard book={book.volumeInfo} key={book.id} />
+            <BookCard
+              book={book.volumeInfo}
+              key={book.id}
+              onLearnMore={() => setPopupBook(book.volumeInfo)}
+            />
           </div>
         ))}
       </div>
-      {/* <CartApp /> */}
-      <CartProvider>
-        {books.map((book) => (
-          <div>
-            <CartToggleButton />
-            <Product book={book.volumeInfo} key={book.id} />
-            {/* <Product id={2} name="Product 2" price={20} /> */}
-            <Cart />
+      {popupBook && (
+        <div className="popup-overlay" onClick={handlePopUpClose}>
+          <div className="popup-content">
+            <BookPopUpCard book={popupBook} />
+            <button onClick={() => setPopupBook(null)}>Close</button>
           </div>
-        ))}
-      </CartProvider>
+        </div>
+      )}
     </div>
   );
 }
